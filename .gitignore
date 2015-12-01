@@ -1,0 +1,6 @@
+/craft/app
+/craft/storage
+/craft/config
+/craft/plugins
+.DS_Store
+

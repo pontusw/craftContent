@@ -1,0 +1,68 @@
+[
+    {
+        "name": "lusitanian/oauth",
+        "version": "dev-dukt",
+        "version_normalized": "dev-dukt",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dukt/PHPoAuthLib.git",
+            "reference": "fc390cf65ab331d09ac0d0d14d186c4ba63dc7e6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dukt/PHPoAuthLib/zipball/fc390cf65ab331d09ac0d0d14d186c4ba63dc7e6",
+            "reference": "fc390cf65ab331d09ac0d0d14d186c4ba63dc7e6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*",
+            "predis/predis": "0.8.*@dev",
+            "symfony/http-foundation": "~2.1"
+        },
+        "suggest": {
+            "ext-openssl": "Allows for usage of secure connections with the stream-based HTTP client.",
+            "predis/predis": "Allows using the Redis storage backend.",
+            "symfony/http-foundation": "Allows using the Symfony Session storage backend."
+        },
+        "time": "2014-11-07 00:22:38",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.1-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "OAuth": "src",
+                "OAuth\\Unit": "tests"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "David Desberg",
+                "email": "david@daviddesberg.com"
+            },
+            {
+                "name": "Pieter Hordijk",
+                "email": "info@pieterhordijk.com"
+            }
+        ],
+        "description": "PHP 5.3+ oAuth 1/2 Library",
+        "keywords": [
+            "authentication",
+            "authorization",
+            "oauth",
+            "security"
+        ],
+        "support": {
+            "source": "https://github.com/dukt/PHPoAuthLib/tree/dukt"
+        }
+    }
+]

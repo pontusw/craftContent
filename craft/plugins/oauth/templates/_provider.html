@@ -1,0 +1,84 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% if providerHandle is not defined %}{% set providerHandle = null %}{% endif %}
+
+{% if provider is not defined %}
+    {% if providerHandle %}
+        {% set provider = craft.oauth.getProvider(providerHandle, false) %}
+
+        {% if not provider %}{% exit 404 %}{% endif %}
+    {% else %}
+        {% set provider = null %}
+    {% endif %}
+{% endif %}
+
+
+{% set title = provider.name~" Settings"|t %}
+
+{% set crumbs = [
+    { label: "Settings"|t, url: url('settings') },
+    { label: "Plugin"|t, url: url('settings/plugins') },
+    { label: "OAuth"|t, url: url('settings/plugins/oauth') }
+] %}
+
+{% set content %}
+
+
+    <form method="post" action="" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="oauth/providerSave">
+        <input type="hidden" name="redirect" value="settings/plugins/oauth" />
+        {% if provider %}<input type="hidden" name="providerId" value="{{ provider.id }}" />{% endif %}
+        <input type="hidden" name="providerHandle" value="{{ provider.handle }}" />
+
+        <h2 class="first">{{ "Create an OAuth application"|t }}</h2>
+
+        <p>
+            {% if provider.source.consoleUrl %}
+                {{ "Create an OAuth 2.0 application and enable associated providers in the {console}"|t({
+                    console:           '<a href=\"'~provider.source.consoleUrl~'\">'~'{provider} API Management Console'|t({provider:provider.name})~'</a>'
+                })|raw }}
+            {% else %}
+                {{ "Create an OAuth 2.0 application and enable associated providers in the API management Console."|t }}
+            {% endif %}
+
+
+        </p>
+
+
+        <p>{{ "Once created, configure the application with the following settings. You might not need to use all of them."|t }}</p>
+
+        <ul>
+            <li><strong>{{ "Web Origin"|t }}:</strong> {{siteUrl}}</li>
+            <li><strong>{{ "Redirect URI"|t }}:</strong> {{craft.oauth.callbackUrl(provider.handle)}}</li>
+        </ul>
+
+        <hr>
+
+        <h2>{{ "Client ID & Secret"|t }}</h2>
+
+        <p>{{ "Use the client ID & secret from the OAuth application that you've just created."|t }}</p>
+
+        {{ forms.textField({
+            label: 'Client Id'|t,
+            required: true,
+            name: 'provider[clientId]',
+            value: provider ? provider.clientId : null,
+            errors: provider ? provider.errors('clientId') : null
+        }) }}
+
+        {{ forms.textField({
+            label: 'Client Secret'|t,
+            required: true,
+            name: 'provider[clientSecret]',
+            value: provider ? provider.clientSecret : null,
+            errors: provider ? provider.errors('clientSecret') : null
+        }) }}
+
+        <div class="buttons">
+            <input class="btn submit" type="submit" value="{{ 'Save'|t }}">
+        </div>
+
+    </form>
+
+{% endset %}

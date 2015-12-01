@@ -1,0 +1,25 @@
+{% extends "_layouts/cp" %}
+
+{% set title = "Jobs Api"|t %}
+
+{% includeJsResource 'jobsapi/js/script.js' %}
+
+{% import "_includes/forms" as forms %}
+
+{% set content %}
+
+        <table class="data">
+
+            <h1>Insert test</h1/>
+
+            <form method="post" action="" accept-charset="UTF-8">
+                <input type="hidden" name="action" value="JobsApi/Jobs/SaveJob">
+                <input type="hidden" name="redirect" value="jobsapi">
+
+                <!-- ...-->
+
+                <input class="btn submit" type="submit" value="{{ 'Submit'|t }}">
+            </form>
+        </table>
+
+{% endset %}

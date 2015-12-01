@@ -3,4 +3,4 @@
 /craft/config
 /craft/plugins
 .DS_Store
-
+.gitignore
